@@ -1,5 +1,10 @@
 
 // Global Declartions 
+@import 'common';
+@import 'home';
+@import 'variables';
+@import 'mixins';
+
 	/*   Header Right align -start  */
     @font-face {
         font-family: myFont;
@@ -42,6 +47,3 @@
                 -ms-box-shadow: $login-shadow;
                     box-shadow: $login-shadow;
         }
-    
-    @import 'common';
-    @import 'home';

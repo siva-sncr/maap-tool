@@ -1,0 +1,11 @@
+{
+    "restapi": {
+        "host": "localhost:3000",
+        "protocol": "https",
+        "contextPath": "rest/"
+    },
+    "api": {
+        "login": {
+        }
+    }
+}
