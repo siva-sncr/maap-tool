@@ -25,7 +25,7 @@ class HomeComponent extends Component {
                         <Col xs={3} md={3} className="left-col height-100 padding-0">
                             <Header />
                         </Col>
-                        <Col xs={9} md={9} className="height-100 padding-0">
+                        <Col xs={9} md={9} className="right-col padding-0">
                             <MainContent />
                         </Col>
                     </Row>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router";
+import { FormattedMessage } from 'react-intl';
 
 import Navigations from './navigation/navigations';
 import { Navbar, Nav } from 'react-bootstrap';
@@ -12,7 +13,9 @@ class Header extends Component {
                 <Navbar.Header>
                     <Navbar.Brand>
                         <div className="header_logo">
-                            <span className="logo_text">Synchronoss</span>
+                            <span className="logo_text">
+                                <FormattedMessage id="common.logoTitle"></FormattedMessage>
+                            </span>
                         </div>
                     </Navbar.Brand>
                     <Navbar.Toggle />

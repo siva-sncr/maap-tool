@@ -1,8 +1,12 @@
-
 $main-lt-active-bg : #1278BD;
+$header-li-active-bg : #124f97;
+$text-clr: #fff;
 
 .home {
     .left-col{
+        position: fixed;
+        top: 0;
+        left: 0;
         background: $main-lt-active-bg;
 
         .navbar {
@@ -16,7 +20,7 @@ $main-lt-active-bg : #1278BD;
                 .header_logo {
                     width: 100%;
                     text-align: center;
-                    color: #fff;
+                    color: $text-clr;
                     padding-top: 20px;
                     font-weight: bold;
                     text-shadow: none;
@@ -43,18 +47,22 @@ $main-lt-active-bg : #1278BD;
                     }
                     .navbar-nav > li > {
                         a{
-                            color: #fff !important;
+                            color: $text-clr !important;
                             padding-left: 25px !important;
                             font-weight: bold;
                             text-shadow: none;
                         }
                         &:hover a, & a:focus, &.active a{
-                            background: #124f97 !important;
+                            background: $header-li-active-bg !important;
                         }
                     }
                 }
             }
         
         }          
+    }
+    .right-col {
+        margin-left: 25%;
+        min-height: 100%;
     }
 }
