@@ -34,6 +34,9 @@ $methodurl-text-clr: #3c3c3c;
             margin: 10px 40px 10px 0px !important;
         }
     }
+    .maap-std {
+        border-bottom: 1px solid $heading-text-clr;
+    }
     .headers {
         margin-top: 40px;
         padding-left: 20px;
@@ -56,6 +59,10 @@ $methodurl-text-clr: #3c3c3c;
             text-shadow: none;
             font-weight: bold;
             color: #1278BD;
+        }
+        .submit {
+            background: $heading-text-clr;
+            color: #fff;
         }
     }
 

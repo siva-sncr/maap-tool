@@ -4,7 +4,11 @@ export default {
 
     en: {
         common: {
-            logoTitle: "Synchronoss"
+            logoTitle: "Synchronoss",
+            button: {
+                submit: "Submit",
+                refreshAll: "Refresh All"
+            }
         },
         rcsMessaging: {
             heading: {
@@ -23,6 +27,9 @@ export default {
                 standard: {
                     title: "MaaP Standard",
                     addMdn: "Add MDN"
+                },
+                msgStatus: {
+                    title: "Message Status"
                 }
             }
         }
