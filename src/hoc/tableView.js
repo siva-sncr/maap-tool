@@ -69,7 +69,9 @@ class TableView extends Component {
                                 text: '50', value: 50
                         }, {
                                 text: '75', value: 75
-                        }], // A numeric array is also available. the purpose of above example is custom the text
+                        }],
+                        
+                        // A numeric array is also available. the purpose of above example is custom the text
                         onSizePerPageChange: (sizePerPage, page) => {
                                 this.props.s(1, sizePerPage);
                         },
@@ -80,7 +82,9 @@ class TableView extends Component {
                 const handleChange = (type, newState) => {
                         this.props.options.page = newState.page;
                 }
-                const paginationDisabled = list && list.length > 0 ? false : true;
+                const paginationDisabled = this.props.tableVerticalScroll ? true : list && list.length > 0 ? false : true;
+
+                let bootstrapTableClass=this.props.tableVerticalScroll?"table-fixed":"";
 
                 return (
                         <PaginationProvider
@@ -91,8 +95,9 @@ class TableView extends Component {
                                                 paginationProps,
                                                 paginationTableProps
                                         }) => (
-                                                        <div>
+                                                        <div >
                                                                 <BootstrapTable
+                                                                       classes={bootstrapTableClass}
                                                                         onTableChange={handleChange}
                                                                         keyField='id'
                                                                         data={list}
@@ -113,7 +118,7 @@ class TableView extends Component {
                                                                                 />&nbsp;&nbsp;
                                                                 {paginationProps.page === 1 ? paginationProps.page : ((paginationProps.page * paginationProps.sizePerPage) - paginationProps.sizePerPage) + 1} - {((paginationProps.page * paginationProps.sizePerPage) > paginationProps.totalSize) ? paginationProps.totalSize : (paginationProps.page * paginationProps.sizePerPage)} of {paginationProps.totalSize} Rows
                                                         </Col>
-                                                                        <Col xs={5} md={5} sm={5} className="text-right padding-0" style={{ 'float': 'right', 'position': 'absolute', 'right': '0px' }}>
+                                                                        <Col xs={5} md={5} sm={5} className="text-right" style={{ 'float': 'right', 'position': 'absolute', 'right': '0px' }}>
                                                                                 <ButtonToolbar className="pull-right">
                                                                                         <Button
                                                                                                 disabled={paginationProps.page === 1}

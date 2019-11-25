@@ -64,6 +64,25 @@ $methodurl-text-clr: #3c3c3c;
             background: $heading-text-clr;
             color: #fff;
         }
+
+        .table-fixed {
+            thead{
+                display:table;
+                width:100%;
+                table-layout:fixed;
+            }
+            tbody  {
+                display:block;
+                height:140px;
+                overflow:overlay;
+                tr{
+                    display:table;
+                    width:100%;
+                    table-layout:fixed;
+                }
+            }
+        } 
+        
     }
 
 }

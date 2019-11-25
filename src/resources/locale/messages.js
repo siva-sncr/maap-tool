@@ -7,6 +7,7 @@ export default {
             logoTitle: "Synchronoss",
             button: {
                 submit: "Submit",
+                save: "Save",
                 refreshAll: "Refresh All"
             }
         },
@@ -29,7 +30,16 @@ export default {
                     addMdn: "Add MDN"
                 },
                 msgStatus: {
-                    title: "Message Status"
+                    title: "Message Status",
+                    column: {
+                        number: "Number",
+                        status: "Status",
+                        action: "Action"
+                    }
+                },
+                saveJson: {
+                    title: "Save Json",
+                    text: "Do you want to save the json for furture reference ?"
                 }
             }
         }
