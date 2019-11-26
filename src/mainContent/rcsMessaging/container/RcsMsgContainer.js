@@ -14,7 +14,7 @@ class RcsMsgContainer extends Component {
     static contextType = RcsMsgConsumer;
 
     state = {
-        tags: []
+        tags: ['1234567890','2234567890','9999999999']
     };
 
     handleChange = (tags) => {
