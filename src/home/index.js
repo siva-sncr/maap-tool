@@ -10,9 +10,12 @@ import '../resources/css/style.css';
 
 class HomeComponent extends Component {
 
+    state = {
+
+    }
+    
     componentDidMount() {
     }
-
     componentWillReceiveProps(newProps) {
     }
 
