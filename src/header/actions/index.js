@@ -1,3 +1,0 @@
-export {
-    onRouteChange
-} from './headerActionBuilder';
