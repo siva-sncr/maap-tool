@@ -1,34 +1,25 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { FormControl, Row, Col, Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import TagsInput from 'react-tagsinput';
 import 'react-tagsinput/react-tagsinput.css';
 
-import { RcsMsgConsumer } from '../provider/rcsMsgProvider';
+import { RcsMsgContext } from '../provider/rcsMsgProvider';
 import TableView from '../../../hoc/tableView';
 import SingleSelectComponent from '../../../hoc/singleSelectDropdownComponent';
-
+import * as actionBuilder from "../actions";
 
 class RcsMsgContainer extends Component {
     
-    static contextType = RcsMsgConsumer;
+    static contextType = RcsMsgContext;
 
     state = {
-        tags: ['1234567890','2234567890','9999999999']
-    };
+    };    
 
-    handleChange = (tags) => {
-        this.setState({tags: tags});
-    };
-    
     render() {
-
-        const methodTypes = [{value:'--Select--'}];
-        const cardTypes = [{value:'Choose Card'}];
-        const setMethodType = (evt) => {
-            console.log(" evt ",evt);
-        };
-
+        console.log(" this.props.loggedIn ", this.props.loggedIn);
         return (
             <React.Fragment>
                 <div className="rcs_messaging">
@@ -45,12 +36,15 @@ class RcsMsgContainer extends Component {
                         <FormattedMessage id="rcsMessaging.content.methodUrlTitle"></FormattedMessage>
                         <Row className="method_url_row">
                             <Col xs={3} md={3} className="padding-0">
-                                <SingleSelectComponent single handleChange={(evt) => setMethodType(evt)} data={methodTypes} />
+                                <SingleSelectComponent handleChange={(evt) => this.context.setMethodType(evt)} data={this.context.state.methodTypes} />
                             </Col>
                             <Col xs={9} md={9}>
                                 <FormControl 
+                                    type="text"
                                     name="url"
-                                    value="" />
+                                    value={this.context.state.url}
+                                    onChange={(evt) => this.context.onChange(evt)}
+                                    placeholder="enter the url" />
                             </Col>
                         </Row>
                     </div>
@@ -61,17 +55,17 @@ class RcsMsgContainer extends Component {
                             <Col xs={6} md={6} className="padding-0">
                                 <FormattedMessage id="rcsMessaging.content.headers.contentType">
                                     {placeholder=>  
-                                        <FormControl readOnly type="input" value={placeholder} />
+                                        <FormControl readOnly type="input" defaultValue={placeholder} />
                                     }
                                 </FormattedMessage>
                                 <FormattedMessage id="rcsMessaging.content.headers.botId">
                                     {placeholder=>  
-                                        <FormControl readOnly type="input" value={placeholder} />
+                                        <FormControl readOnly type="input" defaultValue={placeholder} />
                                     }
                                 </FormattedMessage>
                                 <FormattedMessage id="rcsMessaging.content.headers.token">
                                     {placeholder=>  
-                                        <FormControl readOnly type="input" value={placeholder} />
+                                        <FormControl readOnly type="input" defaultValue={placeholder} />
                                     }
                                 </FormattedMessage>
 
@@ -79,13 +73,16 @@ class RcsMsgContainer extends Component {
                             <Col xs={6} md={6}>
                                 <FormControl 
                                     name="contentType"
-                                    value="" />
+                                    value={this.context.state.contentType}
+                                    onChange={(evt) => this.context.onChange(evt)} />
                                 <FormControl 
                                     name="botId"
-                                    value="" />
+                                    value={this.context.state.botId}
+                                    onChange={(evt) => this.context.onChange(evt)} />
                                 <FormControl 
                                     name="token"
-                                    value="" />
+                                    value={this.context.state.token}
+                                    onChange={(evt) => this.context.onChange(evt)} />
                             </Col>
                         </Row>
                     </div>
@@ -94,7 +91,7 @@ class RcsMsgContainer extends Component {
                         <FormattedMessage id="rcsMessaging.content.standard.title"></FormattedMessage>
                         <Row className="standard_row">
                             <Col xs={6} md={6} className="padding-0">
-                                <SingleSelectComponent single handleChange={(evt) => setMethodType(evt)} data={cardTypes} />
+                                <SingleSelectComponent single handleChange={(evt) => this.context.setCardType(evt)} data={this.context.state.cardTypes} />
                             </Col>
                         </Row>
                         <div className="MDN_row">
@@ -102,12 +99,18 @@ class RcsMsgContainer extends Component {
                         </div>
                         <Row className="standard_row">
                             <Col xs={12} md={12} className="pl-0">
-                                <TagsInput value={this.state.tags} onChange={(evt) => this.handleChange(evt)} />
+                                <TagsInput value={this.context.state.userContact} onChange={(evt) => this.context.handleChange(evt)} />
                             </Col>
                         </Row>
                         <Row className="standard_row">
                             <Col xs={12} md={12} className="pl-0">
-                                <FormControl componentClass="textarea" placeholder="textarea" rows={15} />
+                                <FormControl 
+                                    componentClass="textarea"
+                                    placeholder="textarea"
+                                    rows={15}
+                                    name="textMessage" 
+                                    value={this.context.state.textMessage}
+                                    onChange={(evt) => this.context.onChange(evt)} />
                             </Col>
                         </Row>
                         <Row className="standard_row">
@@ -116,7 +119,7 @@ class RcsMsgContainer extends Component {
                                     className="submit"
                                     size="lg"
                                     block
-                                    onClick={(evt) => this.submit(evt)} >
+                                    onClick={(evt) => this.props.rcsMsgSubmit(evt,this.context.state)} >
                                     <FormattedMessage id="common.button.submit"></FormattedMessage>
                                 </Button>
                             </Col>
@@ -150,8 +153,7 @@ class RcsMsgContainer extends Component {
                         <Row className="standard_row">
                             <Col xs={8} md={8} className="padding-0">
                                 <FormControl 
-                                    name="saveJson"
-                                    value="" />
+                                    name="saveJson" />
                             </Col>
                         </Row>
                         <Row className="standard_row">
@@ -174,4 +176,17 @@ class RcsMsgContainer extends Component {
     }
 }
 
-export default RcsMsgContainer;
+const mapStateToProps = (state) => {
+    return {
+        loggedIn: state.rcsMsgData.loggedIn
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        rcsMsgSubmit: (evt, data) => dispatch(actionBuilder.rcsMsgSubmit(evt, data))
+    }
+}
+  
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RcsMsgContainer));

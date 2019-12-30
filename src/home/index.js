@@ -7,9 +7,10 @@ import Header from '../header';
 import MainContent from '../mainContent';
 
 import '../resources/css/style.css';
+import '../resources/css/bootstrap-multiselect.css';
 
 class HomeComponent extends Component {
-
+/*
     state = {
 
     }
@@ -17,7 +18,7 @@ class HomeComponent extends Component {
     componentDidMount() {
     }
     componentWillReceiveProps(newProps) {
-    }
+    } */
 
     render() {
 

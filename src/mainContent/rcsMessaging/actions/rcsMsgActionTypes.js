@@ -1,0 +1,2 @@
+
+export const ON_RCSMSG_SUBMIT = "ON_RCSMSG_SUBMIT";
