@@ -1,7 +1,16 @@
 import * as rcsMsgDispatch from './rcsMsgActionDispatch';
+import { postData } from '../../../service/extendedService';
 
-export const rcsMsgSubmit = (evt, data) => {
+export const rcsMsgSubmit = (url, params, returnName) => {
     return dispatch => {
-        dispatch(rcsMsgDispatch.onRcsMsgSubmit(data.token ? data.token : null))
+        postData(url, params, returnName).then(response => {
+            console.log(" Msg Submit  response  ",response);
+            dispatch(rcsMsgDispatch.onRcsMsgSubmit(response.msgId ? response.msgId : null))
+        })
+        .catch(error => {
+            console.log(" Msg Submit  error  ",error);
+            dispatch(rcsMsgDispatch.onRcsMsgSubmit(null))
+        });
+
     };
 };

@@ -16,7 +16,15 @@ class RcsMsgContainer extends Component {
     static contextType = RcsMsgContext;
 
     state = {
-    };    
+    };
+
+    onRCSMsgSubmit = (evt, obj, returnName) => {
+        evt.preventDefault();
+        let params = {};
+        params['RCSMessage'] = { 'textMessage' : obj.textMessage };
+        params['messageContact'] = { 'userContact' : obj.userContact[0] };
+        this.props.rcsMsgSubmit(obj.url, params, returnName);
+    };
 
     render() {
         console.log(" this.props.loggedIn ", this.props.loggedIn);
@@ -119,7 +127,7 @@ class RcsMsgContainer extends Component {
                                     className="submit"
                                     size="lg"
                                     block
-                                    onClick={(evt) => this.props.rcsMsgSubmit(evt,this.context.state)} >
+                                    onClick={(evt) => this.onRCSMsgSubmit(evt,this.context.state, 'RCSMessage')} >
                                     <FormattedMessage id="common.button.submit"></FormattedMessage>
                                 </Button>
                             </Col>
@@ -184,7 +192,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        rcsMsgSubmit: (evt, data) => dispatch(actionBuilder.rcsMsgSubmit(evt, data))
+        rcsMsgSubmit: (url, data, returnName) => dispatch(actionBuilder.rcsMsgSubmit(url, data, returnName))
     }
 }
   
