@@ -10,13 +10,21 @@ import { RcsMsgContext } from '../provider/rcsMsgProvider';
 import TableView from '../../../hoc/tableView';
 import SingleSelectComponent from '../../../hoc/singleSelectDropdownComponent';
 import * as actionBuilder from "../actions";
+import Loader from '../../../hoc/loader';
 
 class RcsMsgContainer extends Component {
     
     static contextType = RcsMsgContext;
 
     state = {
+        list: this.props.list
     };
+
+    componentWillReceiveProps(nextProps, prevProps) {
+        if ((nextProps.list !== prevProps.list) && (nextProps.list.length > 0)) {
+            this.context.updateMsgList(nextProps.list);
+        }
+    }
 
     onRCSMsgSubmit = (evt, obj, returnName) => {
         evt.preventDefault();
@@ -27,10 +35,11 @@ class RcsMsgContainer extends Component {
     };
 
     render() {
-        console.log(" this.props.loggedIn ", this.props.loggedIn);
+        let LoaderData = (this.props.loading) ? <Loader elementClass="ajax-loader" /> : null
         return (
             <React.Fragment>
-                <div className="rcs_messaging">
+                {LoaderData}
+                <div className={(this.props.loading) ? 'rcs_messaging transparent' : 'rcs_messaging'}>
                     <div className="header">
                             <FormattedMessage id="rcsMessaging.heading.title"></FormattedMessage>
                         <div className="desc">
@@ -186,7 +195,8 @@ class RcsMsgContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        loggedIn: state.rcsMsgData.loggedIn
+        list: state.rcsMsgData.list,
+        loading: state.rcsMsgData.loading
     }
 }
 

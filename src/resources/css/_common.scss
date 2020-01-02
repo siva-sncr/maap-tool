@@ -27,6 +27,25 @@ font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     padding-left:0px !important;
 }
 
+//loding for common
+.transparent {
+    opacity: 0.4;
+}
+.ajax-loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -20px;
+    margin-top: -20px;
+    background-image: url('../images/ajax-loader.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 32px;
+    height: 32px;
+    z-index: 9999;
+}
+
+
 /******  dropdown select  ******/
 .full-width + 
 .btn-group {

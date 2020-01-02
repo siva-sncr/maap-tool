@@ -39,6 +39,17 @@ class RcsMsgProvider extends Component {
     this.setState({[evt.target.name]: evt.target.value});
   }
 
+  updateMsgList = (list) => {
+    let tablelist = list.map(obj => {
+      return {
+        number: this.state.userContact[0],
+        ...obj,
+        action:<a href="void:javascript(0);"> Refresh </a>
+      }
+    });
+    RcsMsgUtility.tableOptions.list = tablelist;
+  }
+
   onTablePageChange = (pageNo, sizePerPage) => {
     RcsMsgUtility.tableOptions.pageNo = pageNo;
     RcsMsgUtility.tableOptions.pageSize = sizePerPage;
@@ -50,6 +61,7 @@ class RcsMsgProvider extends Component {
         state: this.state,
         setMethodType: this.setMethodType,
         handleChange: this.handleChange,
+        updateMsgList: this.updateMsgList,
         onPageChange: this.onTablePageChange,
         setCardType: this.setCardType,
         onChange: this.onChange,
